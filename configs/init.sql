@@ -2,7 +2,7 @@
 /* ---------------------------------------- */
 
 /*-------USERS-------*/
-CREATE TABLE users (
+CREATE UNLOGGED TABLE users (
     id          SERIAL          PRIMARY KEY,
 
     email       VARCHAR(80)     NOT NULL UNIQUE,
@@ -15,7 +15,7 @@ CREATE INDEX ON users (lower(nickname));
 
 
 /*------FORUMS-------*/
-CREATE TABLE forums (
+CREATE UNLOGGED TABLE forums (
     id         SERIAL           PRIMARY KEY,
 
     slug       VARCHAR(80)      NOT NULL UNIQUE,
@@ -33,7 +33,7 @@ CREATE INDEX ON forums (lower(slug));
 
 /*----FORUMS-USERS-----*/
 /* denormalization, trying to get more rps :D */
-CREATE TABLE forums_users (
+CREATE UNLOGGED TABLE forums_users (
     id          SERIAL      PRIMARY KEY,
 
     user_id     INTEGER     NOT NULL,
@@ -48,7 +48,7 @@ CREATE INDEX ON forums_users (forum_id, user_id);
 
 
 /*------THREADS------*/
-CREATE TABLE threads (
+CREATE UNLOGGED TABLE threads (
     id          SERIAL                         NOT NULL PRIMARY KEY,
 
     author     INTEGER                         NOT NULL,
@@ -69,7 +69,7 @@ CREATE INDEX ON threads (lower(slug));
 
 
 /*-------POSTS-------*/
-CREATE TABLE posts (
+CREATE UNLOGGED TABLE posts (
     id          SERIAL                          NOT NULL PRIMARY KEY,
 
     author      INTEGER                         NOT NULL,
@@ -95,7 +95,7 @@ CREATE INDEX ON posts (forum);
 
 
 /*-------VOTES------*/
-CREATE TABLE votes (
+CREATE UNLOGGED TABLE votes (
     id        SERIAL      NOT NULL PRIMARY KEY,
 
     thread    INTEGER     NOT NULL,
