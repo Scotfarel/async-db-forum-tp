@@ -15,7 +15,7 @@ CREATE INDEX ON users (lower(nickname));
 
 
 /*------FORUMS-------*/
-CREATE UNLOGGED TABLE forums (
+CREATE TABLE forums (
     id         SERIAL           PRIMARY KEY,
 
     slug       VARCHAR(80)      NOT NULL UNIQUE,
@@ -95,7 +95,7 @@ CREATE INDEX ON posts (forum);
 
 
 /*-------VOTES------*/
-CREATE UNLOGGED TABLE votes (
+CREATE TABLE votes (
     id        SERIAL      NOT NULL PRIMARY KEY,
 
     thread    INTEGER     NOT NULL,
