@@ -15,8 +15,7 @@ ENV PGVER 12
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 RUN wget https://www.postgresql.org/media/keys/ACCC4CF8.asc && apt-key add ACCC4CF8.asc
 RUN apt-get update && apt-get install -y postgresql-$PGVER
-#ENV PGVER 10
-#RUN apt -y update && apt install -y postgresql-$PGVER
+
 
 #
 # Install Go
@@ -41,7 +40,8 @@ RUN /etc/init.d/postgresql start &&\
     /etc/init.d/postgresql stop
 
 RUN echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/$PGVER/main/pg_hba.conf
-RUN echo "listen_addresses='*'\nsynchronous_commit = off\nfsync = off\nshared_buffers = 512MB\neffective_cache_size = 1024MB\n" >> /etc/postgresql/$PGVER/main/postgresql.conf
+RUN echo "listen_addresses='*'" >> /etc/postgresql/$PGVER/main/postgresql.conf
+# RUN echo "listen_addresses='*'\nsynchronous_commit = off\nfsync = off\nshared_buffers = 512MB\neffective_cache_size = 1024MB\n" >> /etc/postgresql/$PGVER/main/postgresql.conf
 
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
